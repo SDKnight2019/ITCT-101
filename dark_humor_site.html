@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dark Humor Corner</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: monospace;
+      padding: 2em;
+    }
+    a {
+      color: #81d4fa;
+      text-decoration: none;
+      margin-right: 1em;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .joke {
+      margin: 1em 0;
+      border-left: 4px solid #d32f2f;
+      padding-left: 1em;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background-color: #d32f2f;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-top: 1em;
+    }
+    button:hover {
+      background-color: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>☠️ Dark Humor Corner</h1>
+    <nav>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('jokes')">Random Joke</a>
+    </nav>
+    <hr />
+
+    <div id="home">
+      <p>Welcome to the corner of the internet where therapy is expensive, and sarcasm is free. This is where we laugh through the existential dread and questionable life choices.</p>
+    </div>
+
+    <div id="jokes" class="hidden">
+      <h2>Bleakly Yours</h2>
+      <button onclick="generateJoke()">Generate Joke</button>
+      <div id="jokeDisplay" class="joke"></div>
+    </div>
+  </div>
+
+  <script>
+    const jokes = [
+      "My life is a comedy. Just not the funny kind.",
+      "I finally got my life together — I just forgot where I put it.",
+      "They say laughter is the best medicine. Tell that to my therapist.",
+      "Why don’t skeletons fight each other? They don’t have the guts. Just like me with my responsibilities.",
+      "I asked for a sign from the universe. It sent me another Monday.",
+      "The glass isn't half full or half empty. It's poisoned.",
+      "Life is short. But apparently not short enough to skip student loans.",
+      "I’m not saying I hate people… but I would unplug their life support to charge my phone.",
+      "I'm not lazy. I'm on energy-saving mode... permanently.",
+      "Some people graduate with honors. I am just honored to graduate from bed each morning."
+    ];
+
+    function showPage(id) {
+      document.getElementById('home').classList.add('hidden');
+      document.getElementById('jokes').classList.add('hidden');
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function generateJoke() {
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+      document.getElementById('jokeDisplay').textContent = joke;
+    }
+  </script>
+</body>
+</html>
