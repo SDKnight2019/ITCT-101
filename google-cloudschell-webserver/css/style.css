@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 2rem;
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    color: #2c3e50;
+  }
+  
+  .image-container {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  ul {
+    margin-left: 2rem;
+    list-style-type: disc;
+  }
+  
+  section {
+    margin-bottom: 2rem;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+  }
+  
