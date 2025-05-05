@@ -5,7 +5,7 @@ const path = require('path');
 
 const PORT = 8080; // Google Cloud Shell allows previewing this port
 
-const KNOWN_FILES = [ '/script.js', '/google-cloudschell-webserver/css/style.css', '/favicon.webp','/google-cloudschell-webserver/86blackout/index.html','/google-cloudschell-webserver/86blackout/image.jpg'];
+const KNOWN_FILES = [ '/script.js', '/css/style.css', '/favicon.webp','/86blackout/index.html','/86blackout/image.jpg'];
 const MIME_TYPES = {
     html: 'text/html',
     js: 'text/javascript',
@@ -24,7 +24,7 @@ const server = http.createServer((request, result) => {
         fs.readFile(filePath, (err, data) => {
             if (err) {
                 result.writeHead(500);
-                result.end(`Error loading ${request.url}`);
+                result.end(`Error loading ${request.url} ${err}`);
             } else {
                 const suffix = path.extname(filePath).slice(1);
                 const mimeType = MIME_TYPES[suffix];
