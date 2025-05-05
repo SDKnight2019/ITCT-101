@@ -5,7 +5,7 @@ const path = require('path');
 
 const PORT = 8080; // Google Cloud Shell allows previewing this port
 
-const KNOWN_FILES = ['/index.html', '/script.js', '/style.css', '/favicon.webp'];
+const KNOWN_FILES = ['/index.html', '/script.js', '/style.css', '/favicon.webp','/86blackout/info.html','86blackout/image.jpg'];
 const MIME_TYPES = {
     html: 'text/html',
     js: 'text/javascript',
