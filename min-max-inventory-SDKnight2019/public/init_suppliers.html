@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Firestore Supplier Loader</title>
+</head>
+<body>
+  <h2>Suppliers Added:</h2>
+  <div id="output"></div>
+
+  <script type="module">
+    // Firebase v10.12.4 modular imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // TODO: Replace with your Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyAY-uNAbb3INTLuyX7GNgcX_lx-hSLGM2o",
+        authDomain: "min-max-inventory-sdknight2019.firebaseapp.com",
+        projectId: "min-max-inventory-sdknight2019",
+        storageBucket: "min-max-inventory-sdknight2019.firebasestorage.app",
+        messagingSenderId: "462662087990",
+        appId: "1:462662087990:web:81c7c5b87a7645251c2f97"
+        };
+
+    // Run after the DOM is loaded
+    window.addEventListener('DOMContentLoaded', async () => {
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const outputDiv = document.getElementById("output");
+
+      const suppliers = [
+        {
+          supplier_name: "Acme Anvils & Gadgets",
+          email_address: "sales@acmeanvils.com",
+          phone_number: "1-800-555-ACME"
+        },
+        {
+          supplier_name: "ToonTown Turbo TNT Co.",
+          email_address: "boom@toontowntnt.com",
+          phone_number: "1-888-123-TOON"
+        },
+        {
+          supplier_name: "Loony Labs Inventions",
+          email_address: "invent@loonylabs.biz",
+          phone_number: "1-877-LOONY-LAB"
+        },
+        {
+          supplier_name: "Wham-O Wacky Widgets",
+          email_address: "orders@whamowidgets.net",
+          phone_number: "1-866-987-WHAM"
+        },
+        {
+          supplier_name: "Rocket Rabbit Supplies",
+          email_address: "hop@rocketrabbit.co",
+          phone_number: "1-855-GO-BUNNY"
+        }
+      ];
+
+      for (const supplier of suppliers) {
+        try {
+          const docRef = await addDoc(collection(db, "suppliers"), supplier);
+          const message = `Added "${supplier.supplier_name}" with ID: ${docRef.id}`;
+          console.log(message);
+          const p = document.createElement("p");
+          p.textContent = message;
+          outputDiv.appendChild(p);
+        } catch (error) {
+          console.error("Error adding supplier:", error);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
