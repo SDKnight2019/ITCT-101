@@ -1,0 +1,108 @@
+:root {
+	--bkgrnd-color: white;
+	--byui-blue: rgb(0, 118, 182);
+}
+
+body {
+	background-color: var(--bkgrnd-color);
+	font-family: "Open Sans", Arial, Helvetica, Verdana, sans-serif;
+}
+
+header {
+	background-color: var(--bkgrnd-color);
+	display: grid;
+	grid-template-columns: 3em fit-content(36em);
+	gap: 0.8em 1.2em;
+}
+header > img.logo {
+	grid-row: 1 / span 2;
+	grid-column: 1;
+	align-self: end;
+	max-width: 3em;
+}
+header > span.user {
+	grid-row: 1;
+	grid-column: 2;
+}
+
+header > nav {
+	grid-row: 2;
+	grid-column: 2;
+}
+nav > ul.tabs {
+	display: inline;
+	list-style-type: none;
+	padding: 0;
+}
+nav > ul.tabs > li {
+	display: inline;
+	margin: 0;
+	border-top: none;
+	border-right: none;
+	border-bottom: 2px solid var(--byui-blue);
+	border-left: none;
+	padding: 0.25em 0.5em;
+	cursor: pointer;
+}
+nav > ul.tabs > li.selected {
+	border-top: 2px solid var(--byui-blue);
+	border-right: 2px solid var(--byui-blue);
+	border-bottom: none;
+	border-left: 2px solid var(--byui-blue);
+}
+
+main > section {
+	display: none;
+}
+main > section.selected {
+	display: block;
+}
+
+section table > thead {
+	position: sticky;
+	top: 0em;
+	background-color: var(--bkgrnd-color);
+}
+section table > thead > tr > th {
+	vertical-align: bottom;
+	text-align: center;
+}
+section table > thead > tr > th[data-name] {
+	cursor: pointer;
+}
+section table > tbody > tr > td {
+	vertical-align: top;
+}
+section table > tbody > tr > td.number {
+	padding-right: 1em;
+	text-align: right;
+}
+
+#receiving table > thead > tr > th[data-name="product_id"],
+#receiving table > tbody > tr > td[data-name="product_id"],
+#outgoing table > thead > tr > th[data-name="product_id"],
+#outgoing table > tbody > tr > td[data-name="product_id"] {
+	display: none;
+}
+
+input[type="number"] {
+	width: 5em;
+	text-align: right;
+}
+input:invalid {
+	background-color: lightpink;
+}
+
+section div.controls {
+	margin: 1em 0 0 2em;
+}
+section div.controls > button {
+	border-radius: 20%;
+	color: white;
+}
+section div.controls > button[name="submit"] {
+	background-color: seagreen;
+}
+section div.controls > button[name="clear"] {
+	background-color: crimson;
+}
