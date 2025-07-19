@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Cosmetics Products to Firestore</title>
+</head>
+<body>
+  <h2>Cosmetics Product Uploader</h2>
+  <button id="submitBtn">Submit Products</button>
+  <div id="output" style="margin-top: 20px;"></div>
+
+  <script type="module">
+    // Import Firebase 10.12.4 Modular API
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // Firebase Configuration
+ 	const firebaseConfig = {
+  		apiKey: "AIzaSyB7cnU6VhpVB3My3L-is37cXCrH0Ku_VpU",
+  		authDomain: "min-max-inventory-knight.firebaseapp.com",
+  		projectId: "min-max-inventory-knight",
+  		storageBucket: "min-max-inventory-knight.firebasestorage.app",
+  		messagingSenderId: "265610581446",
+  		appId: "1:265610581446:web:ffeef894e93008a69b0ec7"
+	};
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 20 Cosmetic Products
+    const products = [
+      { product_name: "Velvet Matte Lipstick", minimum_quantity: 10, quantity: 25, maximum_quantity: 50, supplier_id: "F9YerNKBWUu32dPwRy4M" },
+      { product_name: "Hydrating Face Serum", minimum_quantity: 15, quantity: 30, maximum_quantity: 60, supplier_id: "PxkKkxmZBQyNZTUxAn8s" },
+      { product_name: "Aloe Vera Moisturizer", minimum_quantity: 20, quantity: 50, maximum_quantity: 100, supplier_id: "V86kLHGKrpOO0eWK3OMI" },
+      { product_name: "Charcoal Peel-Off Mask", minimum_quantity: 5, quantity: 12, maximum_quantity: 30, supplier_id: "s70pmzZKrUw7NiUkrBRP" },
+      { product_name: "Waterproof Mascara", minimum_quantity: 10, quantity: 20, maximum_quantity: 40, supplier_id: "tEfksc1WkphPP71SJrjF" },
+      { product_name: "Coconut Lip Balm", minimum_quantity: 25, quantity: 40, maximum_quantity: 75, supplier_id: "F9YerNKBWUu32dPwRy4M" },
+      { product_name: "Vitamin C Toner", minimum_quantity: 10, quantity: 18, maximum_quantity: 35, supplier_id: "PxkKkxmZBQyNZTUxAn8s" },
+      { product_name: "Rosewater Setting Spray", minimum_quantity: 8, quantity: 15, maximum_quantity: 30, supplier_id: "V86kLHGKrpOO0eWK3OMI" },
+      { product_name: "Eyebrow Definer Pencil", minimum_quantity: 12, quantity: 30, maximum_quantity: 50, supplier_id: "s70pmzZKrUw7NiUkrBRP" },
+      { product_name: "Mineral Pressed Powder", minimum_quantity: 15, quantity: 25, maximum_quantity: 45, supplier_id: "tEfksc1WkphPP71SJrjF" },
+      { product_name: "Gel Eyeliner", minimum_quantity: 10, quantity: 20, maximum_quantity: 40, supplier_id: "F9YerNKBWUu32dPwRy4M" },
+      { product_name: "Shea Butter Hand Cream", minimum_quantity: 20, quantity: 45, maximum_quantity: 80, supplier_id: "PxkKkxmZBQyNZTUxAn8s" },
+      { product_name: "Matte Foundation", minimum_quantity: 15, quantity: 30, maximum_quantity: 60, supplier_id: "V86kLHGKrpOO0eWK3OMI" },
+      { product_name: "Tea Tree Oil Cleanser", minimum_quantity: 18, quantity: 25, maximum_quantity: 50, supplier_id: "s70pmzZKrUw7NiUkrBRP" },
+      { product_name: "Tinted Moisturizer SPF 30", minimum_quantity: 10, quantity: 22, maximum_quantity: 45, supplier_id: "tEfksc1WkphPP71SJrjF" },
+      { product_name: "Exfoliating Face Scrub", minimum_quantity: 15, quantity: 30, maximum_quantity: 60, supplier_id: "F9YerNKBWUu32dPwRy4M" },
+      { product_name: "Highlighter Palette", minimum_quantity: 8, quantity: 16, maximum_quantity: 32, supplier_id: "PxkKkxmZBQyNZTUxAn8s" },
+      { product_name: "Makeup Remover Wipes", minimum_quantity: 20, quantity: 35, maximum_quantity: 70, supplier_id: "V86kLHGKrpOO0eWK3OMI" },
+      { product_name: "Nail Strengthening Polish", minimum_quantity: 12, quantity: 24, maximum_quantity: 48, supplier_id: "s70pmzZKrUw7NiUkrBRP" },
+      { product_name: "Overnight Repair Cream", minimum_quantity: 5, quantity: 10, maximum_quantity: 25, supplier_id: "tEfksc1WkphPP71SJrjF" }
+    ];
+
+    // Function to upload products and display result
+    async function addProducts() {
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      for (const product of products) {
+        try {
+          const docRef = await addDoc(collection(db, "products"), product);
+          output.innerHTML += `<p>Added "${product.product_name}" with ID: <strong>${docRef.id}</strong></p>`;
+        } catch (e) {
+          output.innerHTML += `<p style="color:red;">Error adding "${product.product_name}": ${e.message}</p>`;
+        }
+      }
+    }
+
+    // Attach event to button
+    document.getElementById("submitBtn").addEventListener("click", addProducts);
+  </script>
+</body>
+</html>

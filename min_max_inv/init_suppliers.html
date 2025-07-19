@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Cartoon Suppliers</title>
+</head>
+<body>
+  <h2>Cartoon Supplier Uploader</h2>
+  <button id="submitBtn">Submit Suppliers</button>
+  <div id="output" style="margin-top: 20px;"></div>
+
+  <script type="module">
+    // Import Firebase SDK v10.12.4
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // Your Firebase config
+	const firebaseConfig = {
+  		apiKey: "AIzaSyB7cnU6VhpVB3My3L-is37cXCrH0Ku_VpU",
+  		authDomain: "min-max-inventory-knight.firebaseapp.com",
+  		projectId: "min-max-inventory-knight",
+  		storageBucket: "min-max-inventory-knight.firebasestorage.app",
+  		messagingSenderId: "265610581446",
+  		appId: "1:265610581446:web:ffeef894e93008a69b0ec7"
+	};
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Supplier data
+    const suppliers = [
+      {
+        supplier_name: "Acme Anvils Co.",
+        email_address: "sales@acmeanvils.com",
+        phone_number: "555-0101"
+      },
+      {
+        supplier_name: "ToonTech Gadgets",
+        email_address: "info@toontechgadgets.com",
+        phone_number: "555-2020"
+      },
+      {
+        supplier_name: "Loony Labs Ltd.",
+        email_address: "support@loonylabs.com",
+        phone_number: "555-3333"
+      },
+      {
+        supplier_name: "Rocket Pants Inc.",
+        email_address: "contact@rocketpants.com",
+        phone_number: "555-4242"
+      },
+      {
+        supplier_name: "Who Framed Supplies",
+        email_address: "orders@whoframedsupplies.com",
+        phone_number: "555-6161"
+      }
+    ];
+
+    // Function to run on button click
+    async function addSuppliers() {
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = ''; // Clear previous output
+
+      for (const supplier of suppliers) {
+        try {
+          const docRef = await addDoc(collection(db, "suppliers"), supplier);
+          outputDiv.innerHTML += `<p>Added "${supplier.supplier_name}" with ID: <strong>${docRef.id}</strong></p>`;
+        } catch (e) {
+          outputDiv.innerHTML += `<p style="color:red;">Error adding "${supplier.supplier_name}": ${e.message}</p>`;
+        }
+      }
+    }
+
+    // Button click listener
+    document.getElementById("submitBtn").addEventListener("click", addSuppliers);
+  </script>
+</body>
+</html>
